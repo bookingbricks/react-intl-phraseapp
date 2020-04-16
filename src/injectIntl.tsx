@@ -5,11 +5,13 @@ import { escapeId, isPhraseEnabled } from './functions';
 export type ReactIntlPhraseProps = {
     translate: (_: string)=> string;
     formatMessage: (_: {id?: string}) => string;
+    getInitialProps?: any;
 };
 
-export function injectIntl(WrappedComponent: React.ComponentType<ReactIntlPhraseProps>, options?: Parameters<typeof injectIntlReact>[1]): ReturnType<typeof injectIntlReact> & React.FC<ReactIntlPhraseProps> {
+export function injectIntl(WrappedComponent: any, options?: any) : any {
     class InjectPhrase extends React.Component implements ReactIntlPhraseProps {
         constructor(...args: ConstructorParameters<typeof React.Component>) {
+            console.log('...args', ...args)
             super(...args);
 
             this.render = this.render.bind(this);
@@ -33,6 +35,10 @@ export function injectIntl(WrappedComponent: React.ComponentType<ReactIntlPhrase
             } else {
                 return this.translate(id);
             }
+        }
+
+        static getInitialProps(props) {
+          return WrappedComponent.getInitialProps(props);
         }
 
         render() {
