@@ -7,12 +7,10 @@ function sanitizeConfig(config: any): any {
   return config;
 }
 
-const isClient = (typeof(window) !== 'undefined');
-
 export function initializePhraseAppEditor (config: any) {
   if (phraseAppEditor) return;
   phraseAppEditor = true;
-  if (isClient) {
+  if (typeof(window) !== 'undefined') {
     (<any>window).PHRASEAPP_ENABLED = config.phraseEnabled;
     (<any>window).PHRASEAPP_CONFIG = sanitizeConfig(config);
 
@@ -30,14 +28,13 @@ export function initializePhraseAppEditor (config: any) {
         }
       }
     }
-  }
 }
 
 export function isPhraseEnabled() : boolean {
-  return (isClient) ? (<any>window).PHRASEAPP_ENABLED : false;
+  return (typeof(window) !== 'undefined') ? (<any>window).PHRASEAPP_ENABLED : false;
 }
 
 export function escapeId (id : string | number) : string {
-  let config = (isClient) ? (<any>window).PHRASEAPP_CONFIG : {};
+  let config = (typeof(window) !== 'undefined') ? (<any>window).PHRASEAPP_CONFIG : {};
   return  config.prefix + 'phrase_' + id + config.suffix;
 }
