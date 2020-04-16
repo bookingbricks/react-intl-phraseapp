@@ -1,6 +1,6 @@
 let phraseAppEditor = false;
 
-function sanitizeConfig(config: any) : any {
+function sanitizeConfig(config: any): any {
   config.prefix = config.prefix ? config.prefix : '{{__';
   config.suffix = config.suffix ? config.suffix : '__}}';
 
@@ -30,6 +30,7 @@ export function initializePhraseAppEditor (config: any) {
         }
       }
     }
+  }
 }
 
 export function isPhraseEnabled() : boolean {
