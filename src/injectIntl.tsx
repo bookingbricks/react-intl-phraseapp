@@ -8,10 +8,9 @@ export type ReactIntlPhraseProps = {
     getInitialProps?: any;
 };
 
-export function injectIntl(WrappedComponent: any, options?: any) : any {
+export default function injectIntl(WrappedComponent: any, options?: any) : any {
     class InjectPhrase extends React.Component implements ReactIntlPhraseProps {
         constructor(...args: ConstructorParameters<typeof React.Component>) {
-            console.log('...args', ...args)
             super(...args);
 
             this.render = this.render.bind(this);
@@ -35,10 +34,6 @@ export function injectIntl(WrappedComponent: any, options?: any) : any {
             } else {
                 return this.translate(id);
             }
-        }
-
-        static getInitialProps(props) {
-          return WrappedComponent.getInitialProps(props);
         }
 
         render() {
