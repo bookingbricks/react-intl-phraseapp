@@ -18,6 +18,7 @@ module.exports = {
         './src/index.ts'
     ],
     output: {
+        globalObject: 'this',
         path: __dirname + '/dist',
         filename: 'react-intl-phraseapp.js',
         libraryTarget: "umd",
